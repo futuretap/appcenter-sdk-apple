@@ -155,7 +155,7 @@ static MSACDeviceTracker *sharedInstance = nil;
 - (MSACDevice *)updatedDevice {
   @synchronized(self) {
     MSACDevice *newDevice = [MSACDevice new];
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_VISION
     CTTelephonyNetworkInfo *telephonyNetworkInfo = [CTTelephonyNetworkInfo new];
     CTCarrier *carrier;
 
@@ -198,7 +198,8 @@ static MSACDeviceTracker *sharedInstance = nil;
     newDevice.timeZoneOffset = [self timeZoneOffset:[NSTimeZone localTimeZone]];
     newDevice.screenSize = [self screenSize];
     newDevice.appVersion = [self appVersion:MSAC_APP_MAIN_BUNDLE];
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_VISION
+
     newDevice.carrierCountry = [self carrierCountry:carrier] ?: overriddenCountryCode;
     newDevice.carrierName = [self carrierName:carrier];
 #else
@@ -391,6 +392,8 @@ static MSACDeviceTracker *sharedInstance = nil;
   CGRect frame;
   [invocation getReturnValue:&frame];
   return [NSString stringWithFormat:@"%dx%d", (int)frame.size.width, (int)frame.size.height];
+#elif TARGET_OS_VISION
+	return @"3400x3400";
 #else
   CGFloat scale = [UIScreen mainScreen].scale;
   CGSize screenSize = [UIScreen mainScreen].bounds.size;
@@ -398,7 +401,7 @@ static MSACDeviceTracker *sharedInstance = nil;
 #endif
 }
 
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_VISION
 - (NSString *)carrierName:(CTCarrier *)carrier {
   return [self isValidCarrierName:carrier.carrierName] ? carrier.carrierName : nil;
 }

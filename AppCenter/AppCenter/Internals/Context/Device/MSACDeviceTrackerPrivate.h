@@ -4,7 +4,7 @@
 #ifndef MSAC_DEVICE_TRACKER_PRIVATE_H
 #define MSAC_DEVICE_TRACKER_PRIVATE_H
 
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_VISION
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #endif
@@ -114,7 +114,7 @@ static NSString *const kMSACPastDevicesKey = @"PastDevices";
  */
 - (NSString *)screenSize;
 
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_VISION
 /**
  * Get the network carrier name.
  *
