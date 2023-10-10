@@ -26,7 +26,7 @@ static NSString *kMSACSecretSeparator = @"=";
 
 #if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 static NSString *kMSACAppSecretOSKey = @"macos=";
-#elif TARGET_OS_IOS
+#elif TARGET_OS_IOS || TARGET_OS_VISION
 static NSString *kMSACAppSecretOSKey = @"ios=";
 #elif TARGET_OS_TV
 static NSString *kMSACAppSecretOSKey = @"appsecret=";

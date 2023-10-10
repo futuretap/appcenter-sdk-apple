@@ -9,6 +9,8 @@
 #define APP_CENTER_C_NAME "appcenter.maccatalyst"
 #elif TARGET_OS_IOS
 #define APP_CENTER_C_NAME "appcenter.ios"
+#elif TARGET_OS_VISION
+#define APP_CENTER_C_NAME "appcenter.vision"
 #elif TARGET_OS_OSX
 #define APP_CENTER_C_NAME "appcenter.macos"
 #elif TARGET_OS_TV
